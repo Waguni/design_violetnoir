@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#050507">
+<title>VIOLET NOIR — PWA design kit</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="../violetnoir.css">
+<style>
+  /* demo page layout only — not part of the kit */
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px 120px; position: relative; }
+  section { padding: 44px 0; border-top: 1px solid var(--vn-line); }
+  .head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 26px; }
+  .head span { font-family: var(--vn-mono); font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--vn-txt-mute); }
+  .head h2 { margin: 0; font-size: 24px; font-weight: 600; letter-spacing: -.01em; }
+  .cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 16px; }
+  .stack { display: flex; flex-direction: column; gap: 16px; }
+  .row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+  .field { display: flex; flex-direction: column; gap: 8px; }
+  .shell { border-radius: 22px; overflow: hidden; box-shadow: inset 0 0 0 1px var(--vn-line-2), var(--vn-shadow-lg); }
+  .scroller { overflow-x: auto; padding-bottom: 4px; }
+  table { width: 100%; border-collapse: collapse; min-width: 560px; }
+  th { font: 500 10px/1 var(--vn-mono); letter-spacing: .18em; text-transform: uppercase; color: var(--vn-txt-mute); text-align: left; padding: 14px 22px; box-shadow: inset 0 -1px 0 var(--vn-line); }
+  td { padding: 15px 22px; box-shadow: inset 0 -1px 0 var(--vn-line); font-size: 14px; }
+  tr:hover td { background: rgba(168, 85, 247, .05); }
+  .overlay { position: fixed; inset: 0; z-index: 90; background: rgba(2,2,4,.72); backdrop-filter: blur(6px); display: none; }
+  .overlay[data-open] { display: grid; place-items: center; padding: 24px; }
+  #sheet[data-open] { display: flex; align-items: flex-end; justify-content: center; padding: 0; }
+  #toast { position: fixed; left: 50%; bottom: 28px; transform: translateX(-50%); z-index: 95; display: none; align-items: center; gap: 12px; padding: 14px 20px; border-radius: var(--vn-r-pill); background: rgba(13,11,18,.95); backdrop-filter: var(--vn-blur); box-shadow: var(--vn-ring-acc), var(--vn-shadow-lg), var(--vn-glow-sm); }
+  #toast[data-open] { display: flex; }
+  @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+</style>
+</head>
+<body class="vn-field">
+<div class="wrap vn-grid">
+
+  <header style="padding:72px 0 56px;display:flex;flex-direction:column;gap:20px;">
+    <div class="row" style="gap:12px;">
+      <div style="width:30px;height:30px;border-radius:9px;background:linear-gradient(145deg,var(--vn-acc),var(--vn-acc-3));box-shadow:var(--vn-glow);"></div>
+      <span class="vn-label">violet noir / pwa kit v1.0</span>
+    </div>
+    <h1 class="vn-h1" style="max-width:16ch;">A sharp OLED shell for <span style="color:var(--vn-acc);text-shadow:0 0 40px rgba(168,85,247,.5);">every PWA</span> you ship.</h1>
+    <p style="margin:0;max-width:60ch;font-size:17px;line-height:1.65;color:var(--vn-txt-dim);text-wrap:pretty;">One token set, one component vocabulary. Link <code style="font-family:var(--vn-mono);font-size:14px;color:var(--vn-txt);">violetnoir.css</code>, add <code style="font-family:var(--vn-mono);font-size:14px;color:var(--vn-txt);">class="vn-field"</code> to the body, and build.</p>
+  </header>
+
+  <!-- 01 foundations -->
+  <section>
+    <div class="head"><span>01</span><h2>Foundations</h2></div>
+    <div class="cols">
+      <div class="vn-glass vn-card stack">
+        <span class="vn-label">Accent ramp</span>
+        <div class="row" style="gap:12px;">
+          <div style="width:56px;height:56px;border-radius:14px;background:var(--vn-acc);"></div>
+          <div style="width:56px;height:56px;border-radius:14px;background:var(--vn-acc-2);"></div>
+          <div style="width:56px;height:56px;border-radius:14px;background:var(--vn-acc-3);"></div>
+          <div style="width:56px;height:56px;border-radius:14px;background:var(--vn-acc-ink);box-shadow:var(--vn-ring);"></div>
+        </div>
+        <span class="vn-label">Neutrals</span>
+        <div class="row" style="gap:12px;">
+          <div style="width:56px;height:56px;border-radius:14px;background:var(--vn-bg);box-shadow:var(--vn-ring);"></div>
+          <div style="width:56px;height:56px;border-radius:14px;background:var(--vn-bg-elev);box-shadow:var(--vn-ring);"></div>
+          <div style="width:56px;height:56px;border-radius:14px;background:var(--vn-txt-mute);"></div>
+          <div style="width:56px;height:56px;border-radius:14px;background:var(--vn-txt-dim);"></div>
+          <div style="width:56px;height:56px;border-radius:14px;background:var(--vn-txt);"></div>
+        </div>
+      </div>
+      <div class="vn-glass vn-card stack">
+        <span class="vn-label">Type</span>
+        <div style="font-size:34px;font-weight:700;letter-spacing:-.025em;">Sora</div>
+        <p style="margin:0;color:var(--vn-txt-dim);font-size:16px;line-height:1.6;">Body copy sits at 15–17px with 1.6 leading. Long enough to read, short enough to scan.</p>
+        <span style="font:500 12px/1 var(--vn-mono);letter-spacing:.18em;text-transform:uppercase;color:var(--vn-acc);">JETBRAINS MONO · LABEL</span>
+      </div>
+      <div class="vn-glass vn-card stack">
+        <span class="vn-label">Elevation &amp; radius</span>
+        <div class="row" style="gap:12px;">
+          <div style="width:70px;height:56px;border-radius:14px;background:var(--vn-glass-2);box-shadow:var(--vn-ring);"></div>
+          <div style="width:70px;height:56px;border-radius:14px;background:var(--vn-glass-2);box-shadow:var(--vn-ring),var(--vn-shadow);"></div>
+          <div style="width:70px;height:56px;border-radius:14px;background:var(--vn-glass-2);box-shadow:var(--vn-ring-acc),var(--vn-glow-sm);"></div>
+          <div style="width:70px;height:56px;border-radius:14px;background:linear-gradient(180deg,var(--vn-acc),var(--vn-acc-2));box-shadow:var(--vn-glow);"></div>
+        </div>
+        <div class="row" style="gap:12px;align-items:flex-end;">
+          <div style="width:48px;height:48px;border-radius:var(--vn-r-sm);background:var(--vn-glass-2);box-shadow:var(--vn-ring);"></div>
+          <div style="width:48px;height:48px;border-radius:var(--vn-r-md);background:var(--vn-glass-2);box-shadow:var(--vn-ring);"></div>
+          <div style="width:48px;height:48px;border-radius:var(--vn-r-lg);background:var(--vn-glass-2);box-shadow:var(--vn-ring);"></div>
+          <div style="width:48px;height:48px;border-radius:var(--vn-r-xl);background:var(--vn-glass-2);box-shadow:var(--vn-ring);"></div>
+          <div style="width:48px;height:48px;border-radius:var(--vn-r-pill);background:var(--vn-glass-2);box-shadow:var(--vn-ring);"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 actions -->
+  <section>
+    <div class="head"><span>02</span><h2>Actions</h2></div>
+    <div class="cols">
+      <div class="vn-glass vn-card stack">
+        <span class="vn-label">Buttons</span>
+        <div class="row">
+          <button class="vn-btn vn-btn--primary">Deploy</button>
+          <button class="vn-btn vn-btn--ghost">Configure</button>
+          <button class="vn-btn vn-btn--quiet">Cancel</button>
+          <button class="vn-btn vn-btn--danger">Delete</button>
+          <button class="vn-btn" disabled>Disabled</button>
+        </div>
+      </div>
+      <div class="vn-glass vn-card stack">
+        <span class="vn-label">Filter chips</span>
+        <div class="row" style="gap:9px;">
+          <button class="vn-chip" aria-pressed="false">All</button>
+          <button class="vn-chip" aria-pressed="true">Errors</button>
+          <button class="vn-chip" aria-pressed="false">Warnings</button>
+          <button class="vn-chip" aria-pressed="false">Traces</button>
+          <button class="vn-chip" aria-pressed="false">Deploys</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 inputs -->
+  <section>
+    <div class="head"><span>03</span><h2>Inputs</h2></div>
+    <div class="cols">
+      <div class="vn-glass vn-card stack">
+        <label class="field"><span class="vn-label">Project name</span><input class="vn-input" placeholder="orbital-console"></label>
+        <label class="field"><span class="vn-label">Region</span>
+          <select class="vn-select">
+            <option>eu-central-1 · Frankfurt</option>
+            <option>eu-west-1 · Dublin</option>
+            <option>us-east-1 · Virginia</option>
+          </select>
+        </label>
+        <label class="field"><span class="vn-label">Notes</span><textarea class="vn-textarea" rows="3" placeholder="Optional context…"></textarea></label>
+      </div>
+      <div class="vn-glass vn-card stack">
+        <label class="field"><span class="vn-label" style="color:var(--vn-acc);">Focused</span>
+          <input class="vn-input" value="orbital-console" style="box-shadow:var(--vn-ring-acc),var(--vn-glow-sm);"></label>
+        <label class="field"><span class="vn-label" style="color:var(--vn-danger);">Error</span>
+          <input class="vn-input" value="orbital console" style="box-shadow:inset 0 0 0 1px rgba(255,93,115,.5);background:rgba(255,93,115,.06);">
+          <span style="font-size:12px;color:var(--vn-danger);">Slugs cannot contain spaces.</span></label>
+        <div class="field"><span class="vn-label">Search</span>
+          <div class="row" style="gap:10px;background:rgba(0,0,0,.34);border-radius:var(--vn-r-pill);padding:0 18px;min-height:46px;box-shadow:var(--vn-ring);flex-wrap:nowrap;">
+            <span style="color:var(--vn-txt-mute);">⌕</span>
+            <input placeholder="Search everything…" style="flex:1;background:none;border:0;outline:none;color:var(--vn-txt);font:400 15px/1 var(--vn-font);">
+            <span style="font:500 10px/1 var(--vn-mono);color:var(--vn-txt-mute);padding:5px 8px;border-radius:6px;box-shadow:var(--vn-ring);">⌘K</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 status -->
+  <section>
+    <div class="head"><span>04</span><h2>Cards, stats &amp; status</h2></div>
+    <div class="cols" style="grid-template-columns:repeat(auto-fit,minmax(210px,1fr));margin-bottom:16px;">
+      <div class="vn-glass vn-card stack" style="gap:8px;"><span class="vn-label">Requests</span><span class="vn-num" style="font-size:30px;font-weight:700;">1.24M</span><span class="vn-num" style="font-size:12px;color:var(--vn-ok);">+8.2% / 24h</span></div>
+      <div class="vn-glass vn-card stack" style="gap:8px;"><span class="vn-label">p95 latency</span><span class="vn-num" style="font-size:30px;font-weight:700;">84ms</span><span class="vn-num" style="font-size:12px;color:var(--vn-ok);">−11ms</span></div>
+      <div class="vn-glass vn-card stack" style="gap:8px;"><span class="vn-label">Error rate</span><span class="vn-num" style="font-size:30px;font-weight:700;">0.31%</span><span class="vn-num" style="font-size:12px;color:var(--vn-warn);">+0.04%</span></div>
+      <div class="vn-glass vn-card stack" style="gap:8px;"><span class="vn-label">Active nodes</span><span class="vn-num" style="font-size:30px;font-weight:700;">248</span><span class="vn-num" style="font-size:12px;color:var(--vn-txt-mute);">stable</span></div>
+    </div>
+    <div class="cols">
+      <div class="vn-glass vn-card stack">
+        <span class="vn-label">Badges</span>
+        <div class="row" style="gap:9px;">
+          <span class="vn-badge vn-badge--ok">Online</span>
+          <span class="vn-badge vn-badge--warn">Degraded</span>
+          <span class="vn-badge vn-badge--danger">Down</span>
+          <span class="vn-badge vn-badge--info">Queued</span>
+          <span class="vn-badge vn-badge--idle">Idle</span>
+        </div>
+        <span class="vn-label">Loading</span>
+        <div class="vn-skeleton" style="height:12px;width:70%;"></div>
+        <div class="vn-skeleton" style="height:12px;width:92%;"></div>
+        <div class="vn-skeleton" style="height:12px;width:46%;"></div>
+      </div>
+      <div class="vn-glass vn-card stack" style="align-items:center;text-align:center;padding:36px 24px;">
+        <div style="width:74px;height:74px;border-radius:22px;background:var(--vn-acc-wash);box-shadow:var(--vn-ring-acc),var(--vn-glow-sm);display:grid;place-items:center;">
+          <div style="width:26px;height:26px;border-radius:8px;box-shadow:inset 0 0 0 2px var(--vn-acc);"></div>
+        </div>
+        <h3 style="margin:0;font-size:18px;font-weight:600;">Nothing here yet</h3>
+        <p style="margin:0;max-width:34ch;font-size:14px;color:var(--vn-txt-dim);">Empty states get one icon, one line of copy, one action. Never a shrug.</p>
+        <button class="vn-btn vn-btn--primary">Create the first one</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 table -->
+  <section>
+    <div class="head"><span>05</span><h2>Tables &amp; lists</h2></div>
+    <div class="vn-glass" style="overflow:hidden;">
+      <div class="scroller">
+        <table>
+          <thead><tr><th>Node</th><th>Region</th><th style="text-align:right;">Latency</th><th style="text-align:right;">State</th></tr></thead>
+          <tbody>
+            <tr><td>edge-fra-01</td><td style="font-family:var(--vn-mono);color:var(--vn-txt-dim);font-size:13px;">eu-central</td><td class="vn-num" style="text-align:right;">38 ms</td><td style="text-align:right;"><span class="vn-badge vn-badge--ok">Online</span></td></tr>
+            <tr><td>edge-dub-02</td><td style="font-family:var(--vn-mono);color:var(--vn-txt-dim);font-size:13px;">eu-west</td><td class="vn-num" style="text-align:right;">52 ms</td><td style="text-align:right;"><span class="vn-badge vn-badge--ok">Online</span></td></tr>
+            <tr><td>edge-iad-07</td><td style="font-family:var(--vn-mono);color:var(--vn-txt-dim);font-size:13px;">us-east</td><td class="vn-num" style="text-align:right;">118 ms</td><td style="text-align:right;"><span class="vn-badge vn-badge--warn">Degraded</span></td></tr>
+            <tr><td>edge-sin-03</td><td style="font-family:var(--vn-mono);color:var(--vn-txt-dim);font-size:13px;">ap-south</td><td class="vn-num" style="text-align:right;">204 ms</td><td style="text-align:right;"><span class="vn-badge vn-badge--danger">Down</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 overlays -->
+  <section>
+    <div class="head"><span>06</span><h2>Overlays &amp; feedback</h2></div>
+    <div class="row" style="margin-bottom:20px;">
+      <button class="vn-btn vn-btn--ghost" data-open-modal>Open modal</button>
+      <button class="vn-btn vn-btn--ghost" data-open-sheet>Open bottom sheet</button>
+      <button class="vn-btn vn-btn--ghost" data-toast>Fire toast</button>
+    </div>
+    <div class="cols">
+      <div style="display:flex;gap:14px;padding:18px;border-radius:16px;background:rgba(52,229,176,.07);box-shadow:inset 0 0 0 1px rgba(52,229,176,.24);">
+        <div style="width:8px;border-radius:999px;background:var(--vn-ok);box-shadow:0 0 14px var(--vn-ok);"></div>
+        <div><div class="vn-label" style="color:var(--vn-ok);">Success</div><div style="font-size:14px;color:var(--vn-txt-dim);">Build 4812 promoted to production.</div></div>
+      </div>
+      <div style="display:flex;gap:14px;padding:18px;border-radius:16px;background:rgba(255,207,92,.07);box-shadow:inset 0 0 0 1px rgba(255,207,92,.24);">
+        <div style="width:8px;border-radius:999px;background:var(--vn-warn);box-shadow:0 0 14px var(--vn-warn);"></div>
+        <div><div class="vn-label" style="color:var(--vn-warn);">Warning</div><div style="font-size:14px;color:var(--vn-txt-dim);">Certificate expires in 6 days.</div></div>
+      </div>
+      <div style="display:flex;gap:14px;padding:18px;border-radius:16px;background:rgba(255,93,115,.07);box-shadow:inset 0 0 0 1px rgba(255,93,115,.24);">
+        <div style="width:8px;border-radius:999px;background:var(--vn-danger);box-shadow:0 0 14px var(--vn-danger);"></div>
+        <div><div class="vn-label" style="color:var(--vn-danger);">Critical</div><div style="font-size:14px;color:var(--vn-txt-dim);">edge-sin-03 unreachable for 4 minutes.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 shells -->
+  <section>
+    <div class="head"><span>07</span><h2>App shells</h2></div>
+    <div class="stack" style="gap:28px;">
+      <div class="stack" style="gap:12px;">
+        <span class="vn-label">Mobile · topbar + bottom nav</span>
+        <div class="shell" style="max-width:390px;height:520px;display:flex;flex-direction:column;background:var(--vn-bg);">
+          <div class="vn-topbar">
+            <div style="width:26px;height:26px;border-radius:8px;background:linear-gradient(145deg,var(--vn-acc),var(--vn-acc-3));box-shadow:var(--vn-glow-sm);"></div>
+            <span style="font-size:15px;font-weight:600;flex:1;">Overview</span>
+            <span style="width:36px;height:36px;border-radius:999px;background:var(--vn-glass);box-shadow:var(--vn-ring);display:grid;place-items:center;color:var(--vn-txt-dim);">⌕</span>
+          </div>
+          <div style="flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px;">
+            <div class="vn-glass" style="padding:16px;"><div class="vn-label">Active</div><div class="vn-num" style="font-size:24px;font-weight:700;">248</div></div>
+            <div class="vn-glass" style="padding:16px;box-shadow:var(--vn-ring-acc),var(--vn-glow-sm);"><div class="vn-label">Uptime</div><div class="vn-num" style="font-size:24px;font-weight:700;color:var(--vn-acc);">99.98</div></div>
+            <div class="vn-glass" style="padding:16px;"><div class="vn-label">Frankfurt cluster</div><div style="font-size:14px;">38 ms · 62 nodes</div></div>
+          </div>
+          <nav class="vn-bottomnav">
+            <button class="vn-navitem" aria-current="page"><span style="width:20px;height:20px;border-radius:7px;box-shadow:inset 0 0 0 2px currentColor;"></span>Home</button>
+            <button class="vn-navitem"><span style="width:20px;height:20px;border-radius:7px;box-shadow:inset 0 0 0 2px currentColor;"></span>Nodes</button>
+            <button class="vn-navitem"><span style="width:20px;height:20px;border-radius:7px;box-shadow:inset 0 0 0 2px currentColor;"></span>Alerts</button>
+            <button class="vn-navitem"><span style="width:20px;height:20px;border-radius:7px;box-shadow:inset 0 0 0 2px currentColor;"></span>You</button>
+          </nav>
+        </div>
+      </div>
+
+      <div class="stack" style="gap:12px;">
+        <span class="vn-label">Desktop · sidebar rail</span>
+        <div class="scroller">
+          <div class="shell" style="min-width:820px;height:460px;display:flex;background:var(--vn-bg);">
+            <aside style="width:var(--vn-sidebar-w);flex:none;display:flex;flex-direction:column;gap:6px;padding:18px 12px;background:rgba(196,170,255,.02);box-shadow:inset -1px 0 0 var(--vn-line);">
+              <div class="row" style="gap:10px;padding:6px 10px 18px;">
+                <div style="width:24px;height:24px;border-radius:8px;background:linear-gradient(145deg,var(--vn-acc),var(--vn-acc-3));box-shadow:var(--vn-glow-sm);"></div>
+                <strong style="font-size:13px;">violet noir</strong>
+              </div>
+              <button class="vn-btn" style="justify-content:flex-start;border-radius:11px;background:var(--vn-acc-wash);color:var(--vn-acc);box-shadow:var(--vn-ring-acc);">Overview</button>
+              <button class="vn-btn vn-btn--quiet" style="justify-content:flex-start;border-radius:11px;">Nodes</button>
+              <button class="vn-btn vn-btn--quiet" style="justify-content:flex-start;border-radius:11px;">Deploys</button>
+              <button class="vn-btn vn-btn--quiet" style="justify-content:flex-start;border-radius:11px;">Logs</button>
+              <button class="vn-btn vn-btn--quiet" style="justify-content:flex-start;border-radius:11px;">Settings</button>
+            </aside>
+            <div style="flex:1;display:flex;flex-direction:column;min-width:0;">
+              <div class="vn-topbar" style="position:static;">
+                <span style="font-size:15px;font-weight:600;">Overview</span>
+                <span style="font:400 11px/1 var(--vn-mono);color:var(--vn-txt-mute);">/ production</span>
+                <div style="flex:1;"></div>
+                <div style="width:32px;height:32px;border-radius:999px;background:linear-gradient(145deg,var(--vn-acc),var(--vn-acc-3));"></div>
+              </div>
+              <div style="flex:1;overflow-y:auto;padding:20px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px;align-content:start;">
+                <div class="vn-glass" style="padding:16px;"><div class="vn-label">Requests</div><div class="vn-num" style="font-size:22px;font-weight:700;">1.24M</div></div>
+                <div class="vn-glass" style="padding:16px;"><div class="vn-label">p95</div><div class="vn-num" style="font-size:22px;font-weight:700;">84ms</div></div>
+                <div class="vn-glass" style="padding:16px;"><div class="vn-label">Errors</div><div class="vn-num" style="font-size:22px;font-weight:700;">0.31%</div></div>
+                <div class="vn-glass" style="grid-column:1/-1;padding:20px;height:180px;"><div class="vn-label">Requests / min</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 pwa -->
+  <section>
+    <div class="head"><span>08</span><h2>PWA patterns</h2></div>
+    <div class="cols">
+      <div class="vn-glass vn-card stack">
+        <span class="vn-label">Install prompt</span>
+        <div class="row" style="gap:14px;padding:16px;border-radius:18px;background:var(--vn-bg-elev);box-shadow:var(--vn-ring-acc),var(--vn-glow-sm);flex-wrap:nowrap;">
+          <div style="width:44px;height:44px;border-radius:13px;background:linear-gradient(145deg,var(--vn-acc),var(--vn-acc-3));box-shadow:var(--vn-glow-sm);flex:none;"></div>
+          <div style="flex:1;min-width:0;"><div style="font-size:14px;font-weight:600;">Install Orbital</div><div style="font:400 11px/1.4 var(--vn-mono);color:var(--vn-txt-mute);">Full screen · offline · 2.1 MB</div></div>
+          <button class="vn-btn vn-btn--primary" style="min-height:38px;padding:0 16px;font-size:12px;">Install</button>
+        </div>
+      </div>
+      <div class="vn-glass vn-card stack">
+        <span class="vn-label">Connection state</span>
+        <div class="vn-badge vn-badge--warn" style="justify-content:center;padding:12px;">Offline · 3 changes queued</div>
+        <div class="vn-badge vn-badge--ok" style="justify-content:center;padding:12px;">Synced 12s ago</div>
+        <div class="vn-badge vn-badge--idle" style="justify-content:center;padding:12px;">Syncing 2 of 5</div>
+      </div>
+      <div class="vn-glass vn-card stack">
+        <span class="vn-label">Manifest</span>
+        <pre style="margin:0;padding:16px;border-radius:14px;background:rgba(0,0,0,.5);box-shadow:var(--vn-ring);overflow-x:auto;font:400 11px/1.7 var(--vn-mono);color:var(--vn-txt-dim);">{
+  "display": "standalone",
+  "background_color": "#050507",
+  "theme_color": "#050507"
+}</pre>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="overlay" id="modal">
+  <div class="vn-glass" style="width:100%;max-width:440px;background:rgba(13,11,18,.95);box-shadow:var(--vn-ring-acc),var(--vn-shadow-lg),var(--vn-glow);border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:16px;animation:rise 240ms var(--vn-ease);">
+    <span class="vn-label" style="color:var(--vn-acc);">Confirm</span>
+    <h3 style="margin:0;font-size:22px;font-weight:600;">Redeploy production?</h3>
+    <p style="margin:0;color:var(--vn-txt-dim);font-size:15px;">Four nodes restart in a rolling window. Traffic keeps flowing; open sockets drop.</p>
+    <div class="row" style="justify-content:flex-end;">
+      <button class="vn-btn vn-btn--quiet" data-close>Cancel</button>
+      <button class="vn-btn vn-btn--primary" data-close data-toast>Redeploy</button>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="sheet">
+  <div class="vn-glass" style="width:100%;max-width:520px;background:rgba(13,11,18,.97);box-shadow:var(--vn-ring-acc),var(--vn-shadow-lg);border-radius:28px 28px 0 0;padding:14px 24px calc(34px + var(--vn-safe-bottom));display:flex;flex-direction:column;gap:12px;animation:rise 260ms var(--vn-ease);">
+    <div style="width:44px;height:4px;border-radius:999px;background:rgba(196,170,255,.2);align-self:center;margin-bottom:8px;"></div>
+    <h3 style="margin:0;font-size:19px;font-weight:600;">Quick actions</h3>
+    <button class="vn-btn vn-btn--ghost" style="justify-content:flex-start;border-radius:16px;min-height:52px;">Restart node</button>
+    <button class="vn-btn vn-btn--ghost" style="justify-content:flex-start;border-radius:16px;min-height:52px;">Drain traffic</button>
+    <button class="vn-btn vn-btn--ghost" style="justify-content:flex-start;border-radius:16px;min-height:52px;">Open logs</button>
+    <button class="vn-btn vn-btn--quiet" data-close>Close</button>
+  </div>
+</div>
+
+<div id="toast">
+  <span style="width:8px;height:8px;border-radius:999px;background:var(--vn-acc);box-shadow:0 0 12px var(--vn-acc);"></span>
+  <span style="font-size:14px;font-weight:500;">Deployment queued</span>
+  <span style="font:400 11px/1 var(--vn-mono);color:var(--vn-txt-mute);">just now</span>
+</div>
+
+<script>
+const q = s => document.querySelector(s);
+const open = el => el.setAttribute('data-open', '');
+const shut = el => el.removeAttribute('data-open');
+let toastTimer;
+
+document.addEventListener('click', e => {
+  const t = e.target.closest('button');
+  if (!t) {
+    if (e.target.classList.contains('overlay')) shut(e.target);
+    return;
+  }
+  if (t.hasAttribute('data-open-modal')) open(q('#modal'));
+  if (t.hasAttribute('data-open-sheet')) open(q('#sheet'));
+  if (t.hasAttribute('data-close')) { shut(q('#modal')); shut(q('#sheet')); }
+  if (t.hasAttribute('data-toast')) {
+    open(q('#toast'));
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => shut(q('#toast')), 2800);
+  }
+  if (t.classList.contains('vn-chip')) {
+    t.setAttribute('aria-pressed', t.getAttribute('aria-pressed') === 'true' ? 'false' : 'true');
+  }
+  if (t.classList.contains('vn-navitem')) {
+    t.parentElement.querySelectorAll('.vn-navitem').forEach(n => n.removeAttribute('aria-current'));
+    t.setAttribute('aria-current', 'page');
+  }
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { shut(q('#modal')); shut(q('#sheet')); }
+});
+</script>
+</body>
+</html>

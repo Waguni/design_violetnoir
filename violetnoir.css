@@ -1,0 +1,221 @@
+/* ============================================================
+   VIOLET NOIR — universal PWA design kit
+   True-black OLED · glass · electric violet. Drop this file into any project.
+   Usage: <link rel="stylesheet" href="violetnoir.css">
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+:root {
+  /* ---- surface ---- */
+  --vn-bg:            #050507;
+  --vn-bg-elev:       #0d0b12;
+  --vn-glass:         rgba(196, 170, 255, 0.045);
+  --vn-glass-2:       rgba(196, 170, 255, 0.075);
+  --vn-glass-hi:      rgba(196, 170, 255, 0.13);
+  --vn-line:          rgba(196, 170, 255, 0.10);
+  --vn-line-2:        rgba(196, 170, 255, 0.18);
+
+  /* ---- ink ---- */
+  --vn-txt:           #ece9f2;
+  --vn-txt-dim:       #9a90ad;
+  --vn-txt-mute:      #6a6180;
+
+  /* ---- accent (electric violet) ---- */
+  --vn-acc:           #a855f7;
+  --vn-acc-2:         #8b3ff0;
+  --vn-acc-3:         #6d28d9;
+  --vn-acc-ink:       #f6f0ff;   /* text on filled accent */
+  --vn-acc-wash:      rgba(168, 85, 247, 0.12);
+  --vn-acc-line:      rgba(168, 85, 247, 0.34);
+
+  /* ---- status (cyan reads against violet) ---- */
+  --vn-ok:            #34e5b0;
+  --vn-warn:          #ffcf5c;
+  --vn-danger:        #ff5d73;
+  --vn-info:          #22d3ee;
+
+  /* ---- radius ---- */
+  --vn-r-xs: 6px;
+  --vn-r-sm: 10px;
+  --vn-r-md: 14px;
+  --vn-r-lg: 20px;
+  --vn-r-xl: 28px;
+  --vn-r-pill: 999px;
+
+  /* ---- space (4pt) ---- */
+  --vn-s1: 4px;  --vn-s2: 8px;  --vn-s3: 12px; --vn-s4: 16px;
+  --vn-s5: 24px; --vn-s6: 32px; --vn-s7: 48px; --vn-s8: 64px;
+
+  /* ---- elevation + glow (sharp, high-contrast — glow marks what is active) ---- */
+  --vn-shadow:      0 8px 30px -12px rgba(0, 0, 0, 0.92);
+  --vn-shadow-lg:   0 26px 64px -20px rgba(0, 0, 0, 0.96);
+  --vn-ring:        inset 0 0 0 1px var(--vn-line);
+  --vn-ring-acc:    inset 0 0 0 1px var(--vn-acc-line);
+  --vn-glow-sm:     0 0 18px -2px rgba(168, 85, 247, 0.34);
+  --vn-glow:        0 0 36px -4px rgba(168, 85, 247, 0.5);
+  --vn-glow-lg:     0 0 74px -8px rgba(168, 85, 247, 0.62);
+  --vn-blur:        blur(18px) saturate(150%);
+
+  /* ---- type ---- */
+  --vn-font:        'Sora', system-ui, sans-serif;
+  --vn-mono:        'JetBrains Mono', ui-monospace, monospace;
+  --vn-track-label: 0.16em;
+
+  /* ---- motion ---- */
+  --vn-ease:  cubic-bezier(0.22, 1, 0.36, 1);
+  --vn-fast:  140ms var(--vn-ease);
+  --vn-base:  240ms var(--vn-ease);
+  --vn-slow:  420ms var(--vn-ease);
+
+  /* ---- app chrome ---- */
+  --vn-topbar-h: 56px;
+  --vn-bottomnav-h: 64px;
+  --vn-sidebar-w: 248px;
+  --vn-safe-top: env(safe-area-inset-top, 0px);
+  --vn-safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* ---- base ---- */
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--vn-bg);
+  color: var(--vn-txt);
+  font-family: var(--vn-font);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overscroll-behavior-y: none;
+}
+/* ambient field — put on the app root. Violet from the top, a cyan whisper below. */
+.vn-field {
+  background:
+    radial-gradient(880px 600px at 88% -10%, rgba(168, 85, 247, 0.18), transparent 58%),
+    radial-gradient(680px 520px at 6% 4%,   rgba(139, 63, 240, 0.12), transparent 60%),
+    radial-gradient(900px 720px at 50% 124%, rgba(34, 211, 238, 0.08), transparent 60%),
+    var(--vn-bg);
+}
+/* faint technical grid overlay */
+.vn-grid::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(168, 85, 247, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(168, 85, 247, 0.055) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(120% 90% at 50% 0%, #000 35%, transparent 78%);
+}
+
+a { color: var(--vn-acc); text-decoration: none; }
+a:hover { color: #c79bff; text-shadow: 0 0 14px rgba(168, 85, 247, 0.55); }
+
+/* ---- primitives ---- */
+.vn-glass {
+  background: var(--vn-glass);
+  backdrop-filter: var(--vn-blur);
+  -webkit-backdrop-filter: var(--vn-blur);
+  box-shadow: var(--vn-ring), var(--vn-shadow);
+  border-radius: var(--vn-r-lg);
+}
+.vn-card { padding: var(--vn-s5); transition: transform var(--vn-base), box-shadow var(--vn-base); }
+.vn-card:hover { transform: translateY(-3px); box-shadow: var(--vn-ring-acc), var(--vn-shadow-lg), var(--vn-glow-sm); }
+
+.vn-label {
+  font-family: var(--vn-mono); font-size: 10px; font-weight: 500;
+  letter-spacing: var(--vn-track-label); text-transform: uppercase; color: var(--vn-txt-mute);
+}
+.vn-h1 { font-size: clamp(28px, 5vw, 46px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; margin: 0; }
+.vn-h2 { font-size: 22px; font-weight: 600; letter-spacing: -0.01em; margin: 0; }
+.vn-num { font-family: var(--vn-mono); font-variant-numeric: tabular-nums; }
+
+/* ---- buttons ---- */
+.vn-btn {
+  font: 600 14px/1 var(--vn-font); display: inline-flex; align-items: center; gap: var(--vn-s2);
+  padding: 12px 20px; border-radius: var(--vn-r-pill); border: 0; cursor: pointer;
+  transition: all var(--vn-fast); min-height: 44px;
+}
+.vn-btn--primary {
+  background: linear-gradient(180deg, var(--vn-acc), var(--vn-acc-2));
+  color: var(--vn-acc-ink); box-shadow: var(--vn-glow-sm);
+}
+.vn-btn--primary:hover { box-shadow: var(--vn-glow); transform: translateY(-1px); }
+.vn-btn--ghost {
+  background: var(--vn-glass); color: var(--vn-txt);
+  box-shadow: var(--vn-ring); backdrop-filter: var(--vn-blur);
+}
+.vn-btn--ghost:hover { box-shadow: var(--vn-ring-acc), var(--vn-glow-sm); color: var(--vn-acc); }
+.vn-btn--quiet { background: transparent; color: var(--vn-txt-dim); }
+.vn-btn--quiet:hover { color: var(--vn-acc); }
+.vn-btn--danger { background: rgba(255, 93, 115, 0.14); color: var(--vn-danger); box-shadow: inset 0 0 0 1px rgba(255, 93, 115, 0.35); }
+.vn-btn:disabled { opacity: 0.38; cursor: not-allowed; box-shadow: var(--vn-ring); background: var(--vn-glass); color: var(--vn-txt-mute); }
+
+.vn-chip {
+  font: 500 12px/1 var(--vn-mono); letter-spacing: 0.04em; padding: 8px 14px;
+  border-radius: var(--vn-r-pill); background: var(--vn-glass); color: var(--vn-txt-dim);
+  box-shadow: var(--vn-ring); cursor: pointer; transition: all var(--vn-fast);
+}
+.vn-chip[aria-pressed="true"], .vn-chip--on {
+  background: var(--vn-acc-wash); color: var(--vn-acc);
+  box-shadow: var(--vn-ring-acc), var(--vn-glow-sm);
+}
+
+/* ---- fields ---- */
+.vn-input, .vn-select, .vn-textarea {
+  width: 100%; font: 400 15px/1.4 var(--vn-font); color: var(--vn-txt);
+  background: rgba(0, 0, 0, 0.34); border: 0; box-shadow: var(--vn-ring);
+  border-radius: var(--vn-r-md); padding: 13px 16px; min-height: 46px;
+  transition: box-shadow var(--vn-fast);
+}
+.vn-input::placeholder { color: var(--vn-txt-mute); }
+.vn-input:focus, .vn-select:focus, .vn-textarea:focus {
+  outline: none; box-shadow: var(--vn-ring-acc), var(--vn-glow-sm);
+}
+
+/* ---- status ---- */
+.vn-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  font: 500 11px/1 var(--vn-mono); letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 6px 11px; border-radius: var(--vn-r-pill);
+}
+.vn-badge--ok     { background: rgba(52, 229, 176, 0.12); color: var(--vn-ok);     box-shadow: inset 0 0 0 1px rgba(52, 229, 176, 0.3); }
+.vn-badge--warn   { background: rgba(255, 207, 92, 0.12); color: var(--vn-warn);   box-shadow: inset 0 0 0 1px rgba(255, 207, 92, 0.3); }
+.vn-badge--danger { background: rgba(255, 93, 115, 0.12); color: var(--vn-danger); box-shadow: inset 0 0 0 1px rgba(255, 93, 115, 0.3); }
+.vn-badge--info   { background: rgba(34, 211, 238, 0.12); color: var(--vn-info);   box-shadow: inset 0 0 0 1px rgba(34, 211, 238, 0.3); }
+.vn-badge--idle   { background: var(--vn-glass); color: var(--vn-txt-mute);        box-shadow: var(--vn-ring); }
+
+/* ---- skeleton ---- */
+.vn-skeleton {
+  border-radius: var(--vn-r-sm);
+  background: linear-gradient(90deg, rgba(196,170,255,0.05) 0%, rgba(168,85,247,0.16) 50%, rgba(196,170,255,0.05) 100%);
+  background-size: 200% 100%;
+  animation: vn-shimmer 1.5s linear infinite;
+}
+@keyframes vn-shimmer { to { background-position: -200% 0; } }
+@keyframes vn-pulse   { 0%,100% { opacity: 1; } 50% { opacity: 0.45; } }
+@keyframes vn-spin    { to { transform: rotate(360deg); } }
+
+/* ---- app chrome ---- */
+.vn-topbar {
+  position: sticky; top: 0; z-index: 40; height: var(--vn-topbar-h);
+  padding-top: var(--vn-safe-top);
+  display: flex; align-items: center; gap: var(--vn-s3); padding-inline: var(--vn-s4);
+  background: rgba(5, 5, 7, 0.74); backdrop-filter: var(--vn-blur);
+  box-shadow: inset 0 -1px 0 var(--vn-line);
+}
+.vn-bottomnav {
+  position: sticky; bottom: 0; z-index: 40;
+  display: grid; grid-auto-flow: column; grid-auto-columns: 1fr;
+  height: var(--vn-bottomnav-h); padding-bottom: var(--vn-safe-bottom);
+  background: rgba(5, 5, 7, 0.84); backdrop-filter: var(--vn-blur);
+  box-shadow: inset 0 1px 0 var(--vn-line);
+}
+.vn-navitem {
+  display: grid; place-items: center; gap: 4px; min-height: 56px;
+  font: 500 10px/1 var(--vn-mono); letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--vn-txt-mute); background: none; border: 0; cursor: pointer;
+}
+.vn-navitem[aria-current="page"] { color: var(--vn-acc); text-shadow: 0 0 12px rgba(168, 85, 247, 0.65); }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
