@@ -1,5 +1,7 @@
 # VIOLET NOIR
 
+![VIOLET NOIR — true-black OLED electric-violet PWA design kit](preview.png)
+
 A universal design language for progressive web apps. True-black OLED, glass, electric violet —
 identical on a 390px phone and a 1600px desktop.
 
